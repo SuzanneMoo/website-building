@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/c6b9632ad6.js" crossorigin="anonymous"></script>
+    <title>Assignment 2 - Website Building</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        #login-container {
+            width: 460px;
+            height: 460px;
+            margin: 0 auto;
+        }
+
+        form label,
+        form input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        form input {
+            padding: 8px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form div {
+            margin: 16px 0px;
+        }
+
+        #input_container1,
+        #input_container2 {
+            position: relative;
+            /* background:#ddd; */
+            /* direction: rtl; */
+        }
+
+        #input {
+            height: 20px;
+            margin: 0;
+            padding-right: 30px;
+            width: 100%;
+        }
+
+        .fas,
+        .fa-check,
+        .fa-times {
+            position: absolute;
+            bottom: 2px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            visibility: hidden;
+        }
+
+        .fa-check {
+            color: green;
+        }
+
+        .fa-times {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-container">
+
+        <form>
+            <div id="input_container1">
+                <label for="username">Username:</label>
+                <input id="username" type="text">
+                <i id="checkIconUsername" class="fas fa-check"></i>
+                <i id="closeIconUsername" class="fas fa-times"></i>
+            </div>
+
+            <div id="input_container2">
+                <label for="password">Password:</label>
+                <input id="password" type="password">
+                <i id="checkIconPassword" class="fas fa-check"></i>
+                <i id="closeIconPassword" class="fas fa-times"></i>
+            </div>
+
+            <input type="submit" id="submitbutton" value="Login">
+        </form>
+        <span style="display: block;" id="message1"></span>
+        <span style="display: block;" id="message2"></span>
+        <span style="display: block;" id="message3"></span>
+    </div>
+
+    <script>
+        submitButton = document.getElementById("submitbutton")
+        submitButton.addEventListener("click", validateUsername)
+        submitButton.addEventListener("click", validatePassword)
+        submitButton.addEventListener("click", preventDefaultEvent)
+        submitButton.addEventListener("click", successfulLogin)
+        function preventDefaultEvent(e) {
+            e.preventDefault();
+            console.log("Default event is prevented!");
+            return false;
+        }
+
+        function successfulLogin() {
+            (username.value == "new_user" && password.value == "123456789") ? document.getElementById("message3").innerHTML = "Login succesful" : document.getElementById("message3").innerHTML = "Login unsuccesful"
+        }
+
+        // USERNAME VALIDATION
+        function validateUsername() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var usernameInput = document.getElementById("username");
+            var checkIconUsername = document.getElementById("checkIconUsername");
+            var closeIconUsername = document.getElementById("closeIconUsername");
+
+            if (username == null || username == "") {
+                closeIconUsername.style.visibility = "visible"
+                checkIconUsername.style.visibility = "hidden"
+                document.getElementById("message1").innerHTML = "Please, enter username"
+                usernameInput.style.borderColor = "#f23918"
+                return false;
+            } else if (username != "new_user") {
+                closeIconUsername.style.visibility = "visible"
+                checkIconUsername.style.visibility = "hidden"
+                document.getElementById("message1").innerHTML = "Please, enter a valid username"
+                usernameInput.style.borderColor = "#f23918"
+                return false;
+            } else {
+                checkIconUsername.style.visibility = "visible"
+                closeIconUsername.style.visibility = "hidden"
+                usernameInput.style.borderColor = "#5af218"
+                document.getElementById("message1").innerHTML = ""
+                document.getElementById("message2").innerHTML = ""
+                return true;
+            }
+        }
+        // PASSWORD VALIDATION
+        function validatePassword() {
+            var checkIconPassword = document.getElementById("checkIconPassword");
+            var closeIconPassword = document.getElementById("closeIconPassword");
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var passwordInput = document.getElementById("password")
+
+            if (password == null || password == "") {
+                closeIconPassword.style.visibility = "visible"
+                checkIconPassword.style.visibility = "hidden"
+                document.getElementById("message2").innerHTML = "Please, enter password"
+                passwordInput.style.borderColor = "#f23918"
+                return false
+            } else if (password != "123456789") {
+                closeIconPassword.style.visibility = "visible"
+                checkIconPassword.style.visibility = "hidden"
+                document.getElementById("message2").innerHTML = "Please, enter a valid password"
+                passwordInput.style.borderColor = "#f23918"
+                return false;
+            } else {
+                checkIconPassword.style.visibility = "visible"
+                closeIconPassword.style.visibility = "hidden"
+                passwordInput.style.borderColor = "#5af218"
+                document.getElementById("message1").innerHTML = ""
+                document.getElementById("message2").innerHTML = ""
+                return true;
+            }
+
+        }
+
+
+    </script>
+</body>
+
+</html>
